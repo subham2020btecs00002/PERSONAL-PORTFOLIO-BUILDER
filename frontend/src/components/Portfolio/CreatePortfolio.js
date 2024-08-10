@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import debounce from "lodash.debounce";
 import "./PortfolioForm.css";
+import {baseUrl} from '../url'
 
 const CreatePortfolio = () => {
   const { user } = useContext(AuthContext);
@@ -16,7 +17,7 @@ const CreatePortfolio = () => {
     const checkPortfolioExists = debounce(async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/portfolio/exists",
+          `${baseUrl}/api/portfolio/exists`,
           {
             headers: { "x-auth-token": localStorage.getItem("token") },
           }
@@ -491,7 +492,7 @@ const CreatePortfolioForm = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:5000/api/portfolio",
+        `${baseUrl}/api/portfolio`,
         formattedData,
         {
           headers: { "x-auth-token": localStorage.getItem("token") },

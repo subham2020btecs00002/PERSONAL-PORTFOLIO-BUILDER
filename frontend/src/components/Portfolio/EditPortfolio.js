@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import "../Portfolio/PortfolioForm.css";
 import { toast } from "react-toastify";
 import debounce from "lodash.debounce";
+import {baseUrl} from '../url'
 
 // Component for handling individual project input
 const ProjectInput = ({ project, index, onChange, onRemove, errors }) => (
@@ -300,7 +301,7 @@ const EditPortfolio = () => {
     const fetchPortfolio = debounce(async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/portfolio",
+          `${baseUrl}/api/portfolio`,
           {
             headers: { "x-auth-token": localStorage.getItem("token") },
           }
@@ -790,7 +791,7 @@ const EditPortfolio = () => {
             : null,
         })),
       };
-      await axios.put("http://localhost:5000/api/portfolio", formattedData, {
+      await axios.put(`${baseUrl}/api/portfolio`, formattedData, {
         headers: { "x-auth-token": localStorage.getItem("token") },
       });
       toast.success("Portfolio updated successfully!");

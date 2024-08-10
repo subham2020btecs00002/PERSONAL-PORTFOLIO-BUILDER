@@ -4,6 +4,8 @@ import axios from 'axios';
 import { AuthContext } from '../components/context/AuthContext';
 import debounce from 'lodash/debounce';
 import './Home.css'; // Import the CSS file
+import {baseUrl} from './url';
+
 
 const Home = () => {
   const { loadUser, isAuthenticated, user } = useContext(AuthContext);
@@ -17,7 +19,7 @@ const Home = () => {
   const checkPortfolioExists = useCallback(
     debounce(async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/portfolio/exists', {
+        const { data } = await axios.get(`${baseUrl}/api/portfolio/exists`, {
           headers: { 'x-auth-token': localStorage.getItem('token') },
         });
         setPortfolioExists(data.exists);
