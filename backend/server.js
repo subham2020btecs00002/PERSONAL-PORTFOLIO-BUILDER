@@ -4,14 +4,7 @@ const cors = require('cors');
 
 const app = express();
 connectDB();
-// app.use(cors());
-
-app.use(cors({
-    origin: ["https://deploy-mern-1wq.vercel.app"],
-    methods: ["POST","GET","PUT","DELETE","PATCH"],
-    credentials: true
-}));
-
+app.use(cors());
 app.use(express.json()); // To parse JSON bodies
 
 app.use('/api/auth', require('./routes/authRoutes'));
