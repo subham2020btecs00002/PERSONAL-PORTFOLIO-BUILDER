@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./PublicPortfolio.css";
 import githubIcon from "../images/github.png"; // Update the path as necessary
 import linkIcon from "../images/linkImage.png"; // Update the path as necessary
+import {baseUrl} from '../url'
 
 import leetcodeIcon from '../images/leetcode.png'; // Update the path as necessary
 import gfgIcon from '../images/icons8-geeksforgeeks-96.png'; // Update the path as necessary
@@ -26,7 +27,7 @@ const PublicPortfolio = () => {
     const fetchPortfolio = async () => {
       try {
         let { data } = await axios.get(
-          `http://localhost:5000/api/portfolio/public/${userId}`
+          `${baseUrl}/api/portfolio/public/${userId}`
         );
         setPortfolio(data);
         setLoading(false);
@@ -50,7 +51,7 @@ const PublicPortfolio = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/contact', contactForm);
+      const response = await axios.post(`${baseUrl}/api/contact`, contactForm);
       if (response.status === 200) {
         toast.success('Email sent successfully');
         // Clear the form

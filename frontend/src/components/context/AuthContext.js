@@ -2,6 +2,7 @@ import React, { createContext, useReducer, useEffect, useCallback } from 'react'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import debounce from 'lodash/debounce';
+import {baseUrl} from '../url'
 
 // Context
 const AuthContext = createContext();
@@ -58,7 +59,7 @@ const AuthProvider = ({ children }) => {
     debounce(async () => {
       if (localStorage.token && !state.user) {
         try {
-          const res = await axios.get('http://localhost:5000/api/auth/user', {
+          const res = await axios.get(`${baseUrl}/api/auth/user`, {
             headers: {
               'x-auth-token': localStorage.token,
             },
@@ -78,7 +79,7 @@ const AuthProvider = ({ children }) => {
   // Register User
   const register = async (formData) => {
     try {
-      await axios.post('http://localhost:5000/api/auth/register', formData);
+      await axios.post(`${baseUrl}/api/auth/register`, formData);
       toast.success('Registration successful! Please login.');
     } catch (err) {
       dispatch({ type: 'AUTH_ERROR' });
@@ -89,7 +90,7 @@ const AuthProvider = ({ children }) => {
   // Login User
   const login = async (formData) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const res = await axios.post(`${baseUrl}/api/auth/login `, formData);
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: res.data,
