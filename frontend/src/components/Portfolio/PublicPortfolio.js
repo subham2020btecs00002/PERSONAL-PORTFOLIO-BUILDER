@@ -123,14 +123,14 @@ const PublicPortfolio = () => {
               <p className="position">
                 <span className="label">Position:</span> {hist.position}
               </p>
-              <p className="responsibility">
+              <div className="responsibility">
                 <span className="responsibility-label">Responsibility:</span>
                 <div className="responsibility-list">
                   {hist.responsibility.split("\n").map((line, index) => (
                     <p key={index}>{line}</p>
                   ))}
                 </div>
-              </p>
+              </div>
             </div>
           ))
         ) : (
